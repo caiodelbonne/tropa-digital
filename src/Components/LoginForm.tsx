@@ -61,7 +61,7 @@ export const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (email === "admin" && senha === "admin") {
+    if (email === "teste" && senha === "teste") {
       localStorage.setItem("loggedIn", "true");
       navigate("/dashboard");
     } else {
@@ -102,6 +102,6 @@ export const LoginForm = () => {
       />
     </ImageContainer>
   </Wrapper>
-</Section>
+  </Section>
   );
 };

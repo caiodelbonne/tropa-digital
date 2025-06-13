@@ -5,6 +5,12 @@
     status: StatusType;
     totalEquipes: number;
   };
+export type FormDataType = {
+  titulo: string;
+  status: "ativo" | "finalizado";
+  totalEquipes: number;
+  data: string;
+};
 
 import ModalAdicionarEvento from "../Components/Modal";
 // Dashboard de Eventos
@@ -20,6 +26,7 @@ import avatar from "../assets/avatar.png";
 
 // alterar state
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // interface
 interface StatusEventoProps {
@@ -309,12 +316,12 @@ const Dashboard = () => {
 
   const [modalAberto, setModalAberto] = useState(false); // controla o modal
 
-  const [formData, setFormData] = useState<Omit<EventoType, 'id'>>({
-    titulo: "",
-    data: "",
-    status: "ativo",
-    totalEquipes: 0,
-  });
+  const [formData, setFormData] = useState<FormDataType>({
+  titulo: "",
+  data: "",
+  status: "ativo",
+  totalEquipes: 0,
+});
 
   const abrirModal = () => setModalAberto(true);
 
@@ -342,9 +349,9 @@ const Dashboard = () => {
       <ContainerDashboard>
         <BarraLateral>
           <SecaoMenu>
-            <a href="">
+            <Link to="/">
               <img src={tropaDigital} alt="Tropa digital logo" />
-            </a>
+            </Link>
             <Logo style={{ fontSize: "10px" }}>Menu</Logo>
             <ItemMenu>
               <img src={dashBoardSvg} alt="Dashboard" /> Dashboard
@@ -375,7 +382,8 @@ const Dashboard = () => {
               </BotaoAcao>
               <BotaoAcao>
                 <img src={logout} alt="icone sair" />
-                <a href="/" style={{ textDecoration: "none", color: "#252525" }}>Sair</a>
+                <Link to="/" style={{ textDecoration: "none", color: "#252525" }}>Sair</Link>
+                {/* <a href="/" >Sair</a> */}
               </BotaoAcao>
             </Dados>
           </SecaoUsuario>

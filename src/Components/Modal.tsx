@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
+// Definindo o tipo StatusType de forma reutilizável
+type StatusType = 'ativo' | 'finalizado';
 
 type ModalAdicionarEventoProps = {
   onClose: () => void;
   onSubmit: () => void;
   formData: {
     titulo: string;
-    status: string;
+    status: StatusType;
     totalEquipes: number;
     data: string;
   };
   setFormData: React.Dispatch<React.SetStateAction<{
     titulo: string;
-    status: string;
+    status: StatusType;
     totalEquipes: number;
     data: string;
   }>>;
@@ -91,14 +93,19 @@ const ModalAdicionarEvento = ({
   formData,
   setFormData,
 }: ModalAdicionarEventoProps) => {
-
-   const handleSave = () => {
-    if (!formData.titulo || !formData.status || !formData.totalEquipes || !formData.data) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+  const handleSave = () => {
+    if (
+      !formData.titulo ||
+      !formData.status ||
+      !formData.totalEquipes ||
+      !formData.data
+    ) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
     onSubmit();
   };
+
   return (
     <FundoModal>
       <ModalContainer>
@@ -124,7 +131,7 @@ const ModalAdicionarEvento = ({
             required
             value={formData.status}
             onChange={(e) =>
-              setFormData({ ...formData, status: e.target.value })
+              setFormData({ ...formData, status: e.target.value as StatusType })
             }
           >
             <option value="ativo">Ativo</option>
